@@ -9,32 +9,27 @@ import org.aspectj.lang.reflect.MethodSignature;
 
 import android.util.Log;
 
-/**
- * Created by Pawel Polanski on 17/09/17.
- */
 @SuppressWarnings({"unused", "ProhibitedExceptionDeclared"})
 @Aspect
 public class MainThreadAspect {
 
-    private static volatile boolean enabled = true;
-
     private static final String TAG = MainThreadAspect.class.getSimpleName();
 
     private static final String POINTCUT_METHOD =
-            "execution(@de.axelspringer.yana.internal.aop.AssertMainThread * *(..))";
+            "execution(@com.jaggernod.threatasserter.annotations.AssertMainThread * *(..))";
 
     private static final String POINTCUT_CONSTRUCTOR =
-            "execution(@e.axelspringer.yana.internal.aop.AssertMainThread *.new(..))";
+            "execution(@com.jaggernod.threatasserter.annotations.AssertMainThread *.new(..))";
 
     @Pointcut(POINTCUT_METHOD)
-    public void methodAnnotatedWithAssertMainThread() {
+    public void methods() {
     }
 
     @Pointcut(POINTCUT_CONSTRUCTOR)
-    public void constructorAnnotatedAssertMainThread() {
+    public void constructors() {
     }
 
-    @Around("methodAnnotatedWithAssertMainThread() || constructorAnnotatedAssertMainThread()")
+    @Around("methods() || constructors()")
     public Object weaveJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         String className = methodSignature.getDeclaringType().getSimpleName();

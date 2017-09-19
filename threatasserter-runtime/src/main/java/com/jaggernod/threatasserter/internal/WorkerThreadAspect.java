@@ -15,20 +15,20 @@ public class WorkerThreadAspect {
     private static final String TAG = WorkerThreadAspect.class.getSimpleName();
 
     private static final String POINTCUT_METHOD =
-            "execution(@de.axelspringer.yana.internal.aop.AssertWorkerThread * *(..))";
+            "execution(@com.jaggernod.threatasserter.annotations.AssertWorkerThread * *(..))";
 
     private static final String POINTCUT_CONSTRUCTOR =
-            "execution(@e.axelspringer.yana.internal.aop.AssertWorkerThread *.new(..))";
+            "execution(@com.jaggernod.threatasserter.annotations.AssertWorkerThread *.new(..))";
 
     @Pointcut(POINTCUT_METHOD)
-    public void methodAnnotatedWithAssertWorkerThread() {
+    public void methods() {
     }
 
     @Pointcut(POINTCUT_CONSTRUCTOR)
-    public void constructorAnnotatedAssertWorkerThread() {
+    public void constructors() {
     }
 
-    @Around("methodAnnotatedWithAssertWorkerThread() || constructorAnnotatedAssertWorkerThread()")
+    @Around("methods() || constructors()")
     public Object weaveJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         String className = methodSignature.getDeclaringType().getSimpleName();

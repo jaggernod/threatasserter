@@ -34,11 +34,11 @@ class ThreatAsserterPlugin implements Plugin<Project> {
             compile 'com.jaggernod:threatasserter-annotations:1.0.0-SNAPSHOT'
         }
 
-        project.extensions.create('hugo', ThreatAsserterExtension)
+        project.extensions.create('threatasserter', ThreatAsserterExtension)
 
         variants.all { variant ->
-            if (!project.hugo.enabled) {
-                log.debug("Hugo is not disabled.")
+            if (!project.threatasserter.enabled) {
+                log.debug("Threat Asserter is not enabled.")
                 return
             }
 
@@ -55,8 +55,8 @@ class ThreatAsserterPlugin implements Plugin<Project> {
                 ]
                 log.debug "ajc args: " + Arrays.toString(args)
 
-                MessageHandler handler = new MessageHandler(true);
-                new Main().run(args, handler);
+                MessageHandler handler = new MessageHandler(true)
+                new Main().run(args, handler)
                 for (IMessage message : handler.getMessages(null, true)) {
                     switch (message.getKind()) {
                         case IMessage.ABORT:
