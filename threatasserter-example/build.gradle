@@ -1,0 +1,51 @@
+buildscript {
+    dependencies {
+        repositories {
+            mavenCentral()
+            jcenter()
+            maven {
+                url 'https://maven.google.com/'
+                name 'Google'
+            }
+
+            // NOTE: This is only needed when developing the plugin!
+            mavenLocal()
+        }
+
+        classpath 'com.android.tools.build:gradle:3.0.0-beta6'
+        classpath 'com.jaggernod:threatasserter-plugin:1.0.0-SNAPSHOT'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'threatasserter'
+
+dependencies {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+
+        // NOTE: This is only needed when developing the plugin!
+        mavenLocal()
+    }
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.1'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    buildTypes {
+        dev {
+            applicationIdSuffix '.dev'
+        }
+    }
+}
