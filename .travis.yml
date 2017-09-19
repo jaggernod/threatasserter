@@ -1,0 +1,20 @@
+language: android
+
+jdk:
+ - oraclejdk7
+ - oraclejdk8
+
+android:
+  components:
+    - build-tools-26.0.1
+    - android-26
+
+    # Update Android SDK Tools
+    - tools
+
+branches:
+  except:
+    - gh-pages
+
+notifications:
+  email: false
