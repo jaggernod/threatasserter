@@ -12,8 +12,8 @@ buildscript {
             mavenLocal()
         }
 
-        classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'com.jaggernod:threatasserter-plugin:1.0.2'
+        classpath 'com.android.tools.build:gradle:3.0.0-beta6'
+        classpath 'com.jaggernod:threatasserter-plugin:1.0.3'
     }
 }
 
