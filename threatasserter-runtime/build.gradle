@@ -59,14 +59,12 @@ android.libraryVariants.all { variant ->
     }
 }
 
-def projectName = "threatasserter-runtime"
-
 publishing {
     publications {
         Production(MavenPublication) {
-            artifact("$buildDir/outputs/aar/$projectName-release.aar")
+            artifact("$buildDir/outputs/aar/$POM_ARTIFACT_ID-release.aar")
             groupId GROUP
-            artifactId projectName
+            artifactId POM_ARTIFACT_ID
             version VERSION_NAME
 
             //The publication doesn't know about our dependencies, so we have to manually add them to the pom
@@ -93,9 +91,11 @@ bintray {
 
     pkg {
         repo = REPOSITORY
-        name = projectName
+        name = POM_ARTIFACT_ID
         licenses = [POM_LICENCE_NAME]
         vcsUrl = POM_SCM_CONNECTION
+        desc = POM_NAME
+        websiteUrl = POM_URL
         version {
             name = VERSION_NAME
             desc = POM_DESCRIPTION

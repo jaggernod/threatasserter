@@ -2,18 +2,15 @@ apply plugin: 'java'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
-
 targetCompatibility = JavaVersion.VERSION_1_6
 sourceCompatibility = JavaVersion.VERSION_1_6
-
-def projectName = "threatasserter-annotations"
 
 publishing {
     publications {
         Production(MavenPublication) {
-            artifact("$buildDir/libs/$projectName-${VERSION_NAME}.jar")
+            artifact("$buildDir/libs/$POM_ARTIFACT_ID-${VERSION_NAME}.jar")
             groupId GROUP
-            artifactId projectName
+            artifactId POM_ARTIFACT_ID
             version VERSION_NAME
 
             //The publication doesn't know about our dependencies, so we have to manually add them to the pom
@@ -40,9 +37,11 @@ bintray {
 
     pkg {
         repo = REPOSITORY
-        name = projectName
+        name = POM_ARTIFACT_ID
         licenses = [POM_LICENCE_NAME]
         vcsUrl = POM_SCM_CONNECTION
+        desc = POM_NAME
+        websiteUrl = POM_URL
         version {
             name = VERSION_NAME
             desc = POM_DESCRIPTION

@@ -2,11 +2,7 @@ package com.jaggernod.threatasserter.internal;
 
 import android.os.Looper;
 
-/**
- * Created by Pawel Polanski on 19/09/17.
- */
-
-class Assertions {
+final class Assertions {
 
     private Assertions() {
     }
