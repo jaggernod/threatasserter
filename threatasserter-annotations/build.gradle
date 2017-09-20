@@ -5,17 +5,15 @@ apply plugin: 'maven-publish'
 targetCompatibility = JavaVersion.VERSION_1_6
 sourceCompatibility = JavaVersion.VERSION_1_6
 
-def projectGroupId = GROUP
-def versionName = VERSION_NAME
 def projectName = "threatasserter-annotations"
 
 publishing {
     publications {
         Production(MavenPublication) {
-            artifact("$buildDir/libs/threatasserter-annotations-1.0.0-SNAPSHOT.jar")
-            groupId projectGroupId
+            artifact("$buildDir/libs/$projectName-${VERSION_NAME}.jar")
+            groupId GROUP
             artifactId projectName
-            version versionName
+            version VERSION_NAME
 
             //The publication doesn't know about our dependencies, so we have to manually add them to the pom
             pom.withXml {
@@ -40,15 +38,14 @@ bintray {
             System.getenv('BINTRAY_API_KEY')
 
     pkg {
-        repo = POM_LICENCE_DIST
+        repo = REPOSITORY
         name = projectName
         licenses = [POM_LICENCE_NAME]
         vcsUrl = POM_SCM_CONNECTION
         version {
-            name = versionName
+            name = VERSION_NAME
             desc = POM_DESCRIPTION
-            vcsTag = versionName
-            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+            vcsTag = VERSION_NAME
         }
     }
     publications = ['Production']
