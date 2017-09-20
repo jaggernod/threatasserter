@@ -28,17 +28,21 @@ class ThreatAsserterPlugin implements Plugin<Project> {
         }
 
         project.dependencies {
-            debugCompile 'com.jaggernod:threatasserter-runtime:1.0.0-SNAPSHOT'
+            debugCompile "com.jaggernod:threatasserter-runtime:${project.version}"
             // TODO this should come transitively
             debugCompile 'org.aspectj:aspectjrt:1.8.6'
-            compile 'com.jaggernod:threatasserter-annotations:1.0.0-SNAPSHOT'
+            compile "com.jaggernod:threatasserter-annotations:${project.version}"
         }
 
-        project.extensions.create('threatasserter', ThreatAsserterExtension)
+        project.extensions.create('threatAsserter', ThreatAsserterExtension)
 
         variants.all { variant ->
-            if (!project.threatasserter.enabled) {
-                log.debug("Threat Asserter is not enabled.")
+            if (!project.threatAsserter.enabled) {
+                log.info("Threat Asserter is not enabled.")
+                return
+            }
+            if (variant.buildType.name == 'release') {
+                log.info("Threat Asserter does not act for release builds.")
                 return
             }
 
