@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
+
 targetCompatibility = JavaVersion.VERSION_1_6
 sourceCompatibility = JavaVersion.VERSION_1_6
 
