@@ -1,4 +1,5 @@
 buildscript {
+    ext.kotlin_version = '1.1.50'
     repositories {
         mavenCentral()
         mavenLocal()
@@ -14,6 +15,7 @@ buildscript {
         classpath 'org.aspectj:aspectjtools:1.8.6'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 

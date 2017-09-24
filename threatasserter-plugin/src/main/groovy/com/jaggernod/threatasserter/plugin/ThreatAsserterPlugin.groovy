@@ -27,7 +27,7 @@ class ThreatAsserterPlugin implements Plugin<Project> {
             variants = project.android.libraryVariants
         }
 
-        def version = '1.0.4'
+        def version = '1.0.5'
         project.dependencies {
             debugCompile "com.jaggernod:threatasserter-runtime:$version"
             // TODO this should come transitively
@@ -60,26 +60,47 @@ class ThreatAsserterPlugin implements Plugin<Project> {
                 ]
                 log.debug "ajc args: " + Arrays.toString(args)
 
-                MessageHandler handler = new MessageHandler(true)
-                new Main().run(args, handler)
-                for (IMessage message : handler.getMessages(null, true)) {
-                    switch (message.getKind()) {
-                        case IMessage.ABORT:
-                        case IMessage.ERROR:
-                        case IMessage.FAIL:
-                            log.error message.message, message.thrown
-                            break
-                        case IMessage.WARNING:
-                            log.warn message.message, message.thrown
-                            break
-                        case IMessage.INFO:
-                            log.info message.message, message.thrown
-                            break
-                        case IMessage.DEBUG:
-                            log.debug message.message, message.thrown
-                            break
-                    }
+                weave(args, log)
+
+                def kotlinClasses = project.file("${project.buildDir}/tmp/kotlin-classes/debug")
+                if (kotlinClasses.exists()) {
+                    String[] argsKotlin = [
+                            "-showWeaveInfo",
+                            "-1.5",
+                            "-inpath", kotlinClasses.toString(),
+                            "-aspectpath", javaCompile.classpath.asPath,
+                            "-d", kotlinClasses.toString(),
+                            "-classpath", javaCompile.classpath.asPath,
+                            "-bootclasspath", project.android.bootClasspath.join(File.pathSeparator)
+                    ]
+
+                    log.debug "ajc args for Kotlin: " + Arrays.toString(args)
+
+                    weave(argsKotlin, log)
                 }
+            }
+        }
+    }
+
+    static void weave(args, log) {
+        MessageHandler handler = new MessageHandler(true)
+        new Main().run(args, handler)
+        for (IMessage message : handler.getMessages(null, true)) {
+            switch (message.getKind()) {
+                case IMessage.ABORT:
+                case IMessage.ERROR:
+                case IMessage.FAIL:
+                    log.error message.message, message.thrown
+                    break
+                case IMessage.WARNING:
+                    log.warn message.message, message.thrown
+                    break
+                case IMessage.INFO:
+                    log.info message.message, message.thrown
+                    break
+                case IMessage.DEBUG:
+                    log.debug message.message, message.thrown
+                    break
             }
         }
     }

@@ -1,12 +1,10 @@
 package com.example.threatasserter;
 
 import com.jaggernod.threatasserter.annotations.AssertMainThread;
-import com.jaggernod.threatasserter.annotations.AssertWorkerThread;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.Toast;
 
@@ -32,9 +30,7 @@ public class MainActivity extends Activity {
         });
     }
 
-    @AssertWorkerThread
     public void onClickWithMainThread(View view) {
-        // Looong task. But will crash before getting here.
-        SystemClock.sleep(1000);
+        new KotlinTest().crashIfNotWorkerThread();
     }
 }

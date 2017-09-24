@@ -6,8 +6,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
-import android.util.Log;
-
 @SuppressWarnings({"unused", "ProhibitedExceptionDeclared"})
 @Aspect
 public class WorkerThreadAspect {
@@ -33,8 +31,6 @@ public class WorkerThreadAspect {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         String className = methodSignature.getDeclaringType().getSimpleName();
         String methodName = methodSignature.getName();
-
-        Log.e(TAG, className + "::" + methodName + " code must not run on the Main thread.");
 
         Assertions.assertWorkerThread();
 
