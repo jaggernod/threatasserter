@@ -27,7 +27,7 @@ class ThreatAsserterPlugin implements Plugin<Project> {
             variants = project.android.libraryVariants
         }
 
-        def version = '1.0.5'
+        def version = '1.0.6'
         project.dependencies {
             debugCompile "com.jaggernod:threatasserter-runtime:$version"
             // TODO this should come transitively
@@ -62,7 +62,7 @@ class ThreatAsserterPlugin implements Plugin<Project> {
 
                 weave(args, log)
 
-                def kotlinClasses = project.file("${project.buildDir}/tmp/kotlin-classes/debug")
+                def kotlinClasses = project.file("${project.buildDir}/tmp/kotlin-classes/${variant.name}")
                 if (kotlinClasses.exists()) {
                     String[] argsKotlin = [
                             "-showWeaveInfo",
