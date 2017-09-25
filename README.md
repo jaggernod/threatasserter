@@ -15,7 +15,7 @@ UI related work on a UI thread.
 
 ```java
 @AssertMainThread
-public static void onClickWithWorkerThreadHelper(Context context) {
+public static void onClickOnMainThread(Context context) {
   Toast.makeText(context, "Will certainly be displayed on Ui Thread... or die trying.", Toast.LENGTH_LONG).show();
 }
 ```
