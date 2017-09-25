@@ -1,5 +1,3 @@
 include ':threatasserter-annotations'
 include ':threatasserter-plugin'
 include ':threatasserter-runtime'
-
-include ':threatasserter-example'
