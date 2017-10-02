@@ -27,7 +27,7 @@ class ThreatAsserterPlugin implements Plugin<Project> {
             variants = project.android.libraryVariants
         }
 
-        def version = '1.0.7'
+        def version = '1.0.8'
         project.dependencies {
             debugCompile "com.jaggernod:threatasserter-runtime:$version"
             // TODO this should come transitively

@@ -42,7 +42,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.jaggernod:threatasserter-plugin:1.0.7'
+    classpath 'com.jaggernod:threatasserter-plugin:1.0.8'
   }
 }
 
