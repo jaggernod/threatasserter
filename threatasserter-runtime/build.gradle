@@ -7,7 +7,7 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
 dependencies {
-    compile 'org.aspectj:aspectjrt:1.8.6'
+    compile 'org.aspectj:aspectjrt:1.8.12'
     compile project(':threatasserter-annotations')
 
     testCompile 'junit:junit:4.12'
@@ -36,7 +36,7 @@ android.libraryVariants.all { variant ->
                 "-bootclasspath", android.bootClasspath.join(File.pathSeparator)
         ]
 
-        MessageHandler handler = new MessageHandler(true);
+        MessageHandler handler = new MessageHandler(true)
         new Main().run(args, handler)
 
         def log = project.logger

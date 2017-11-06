@@ -11,8 +11,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-beta6'
-        classpath 'org.aspectj:aspectjtools:1.8.6'
+        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'org.aspectj:aspectjtools:1.8.12'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -38,7 +38,7 @@ allprojects {
 
 ext {
     compileSdkVersion = 26
-    buildToolsVersion = '26.0.1'
+    buildToolsVersion = '26.0.2'
 }
 
 

@@ -27,11 +27,11 @@ class ThreatAsserterPlugin implements Plugin<Project> {
             variants = project.android.libraryVariants
         }
 
-        def version = '1.0.9'
+        def version = '1.0.10'
         project.dependencies {
             debugCompile "com.jaggernod:threatasserter-runtime:$version"
             // TODO this should come transitively
-            debugCompile 'org.aspectj:aspectjrt:1.8.6'
+            debugCompile 'org.aspectj:aspectjrt:1.8.12'
             compile "com.jaggernod:threatasserter-annotations:$version"
         }
 
