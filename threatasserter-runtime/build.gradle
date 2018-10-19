@@ -7,15 +7,19 @@ apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
 
 dependencies {
-    compile 'org.aspectj:aspectjrt:1.8.12'
-    compile project(':threatasserter-annotations')
+    implementation 'org.aspectj:aspectjrt:1.9.1'
+    implementation project(':threatasserter-annotations')
 
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 }
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
